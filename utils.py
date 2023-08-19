@@ -28,35 +28,6 @@ def transcriptor(uploaded_file, model_size, language):
 
         return result["text"]
 
-import speech_recognition as sr
-
-
-def transcriptor2(uploaded_file, model_size, language):
-    """
-    Transcribes the audio using the Whisper model.
-
-    Args:
-    - uploaded_file (UploadedFile): The uploaded audio file from the user.
-    - model_size (str): The chosen model size (e.g., "Small", "Medium", "Large").
-    - language (str): The chosen language for transcription (e.g., "English", "Spanish").
-
-    Returns:
-    - str: The raw text transcription of the audio.
-    """
-    recognizer = sr.Recognizer()
-
-    with sr.AudioFile(uploaded_file) as source:
-        audio_data = recognizer.record(source)
-
-        try:
-            # Using Google Web Speech API for transcription
-            transcription = recognizer.recognize_google(audio_data)
-            return transcription
-        except sr.UnknownValueError:
-            return "Google Web Speech API could not understand the audio"
-        except sr.RequestError:
-            return "API unavailable or unresponsive"
-
 def run_prompt(prompt):
     """
     Executes a prompt using the OpenAI ChatCompletion API.
